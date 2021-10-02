@@ -1,0 +1,81 @@
+
+
+#include <stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+    int info;
+    struct node*next;
+};
+
+struct node*head=NULL;
+struct node*prev,*curr;
+
+void addnode(int item)
+{
+    struct node*newnode;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->info=item;
+    newnode->next=NULL;
+    if(head==NULL)
+    {
+        head=newnode;
+        return;
+        
+    }
+    if(newnode->info<head->info)
+{newnode->next=head;
+head=newnode;
+return;
+}
+prev=curr=NULL;
+for(curr=head;curr!=NULL;curr=curr->next)
+{
+    if(newnode->info<curr->info)
+    break;
+    else
+    prev=curr;
+    
+}
+newnode->next=prev->next;
+prev->next=newnode;
+}
+
+
+void traverse()
+{
+    for(curr=head;curr!=NULL;curr=curr->next)
+    printf("%d\t",curr->info);
+}
+
+
+int main()
+{
+    int inf,ch;
+    while(1)
+    {
+        printf("\n 1: insertion");
+        printf("\n 2: traversal");
+        printf("\n 3: exit");
+        scanf("%d",&ch);
+        
+        switch(ch)
+        {
+            case 1:
+            printf("\n enter value to add");
+            scanf("%d",&inf);
+            addnode(inf);
+            break;
+            
+            case 2:
+            printf("\n linked list values");
+            traverse();
+            break;
+            
+            case 3:
+            exit(0);
+        }
+        
+    }
+return 0;}
